@@ -4,7 +4,6 @@ services:
     image: postgres:13
     restart: always
     container_name: db
-    hostname: db.happyfox.com
     environment:
       POSTGRES_PASSWORD: sridharpass
     ports:

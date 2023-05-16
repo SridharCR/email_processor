@@ -1,8 +1,10 @@
 import argparse
 import logging
 
+from src.rule_processor.email_loader import get_messages
+
 logging.basicConfig()
-logging.getLogger("sqlalchemy.engine").setLevel(logging.INFO)
+logging.getLogger("sqlalchemy.engine").setLevel(logging.ERROR)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -12,6 +14,7 @@ if __name__ == "__main__":
         nargs="?",
         help="Downloads the email data from gmail and loads it up in postgres database",
         type=bool,
+        action=get_messages(),
     )
     parser.add_argument(
         "--rule-engine",

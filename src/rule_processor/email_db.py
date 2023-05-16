@@ -27,6 +27,12 @@ class EmailMetadata(Base):
     size_estimate: Mapped[int] = mapped_column(BigInteger)
     email_body: Mapped[List["EmailBody"]] = relationship()
 
+    @classmethod
+    def getattr(cls, field):
+        if cls.__dict__.get(field) is not None:
+            return cls.__dict__.get(field)
+        raise Exception("field doesnt exist")
+
 
 class EmailBody(Base):
     """User class will be converted to a dataclass"""
@@ -38,7 +44,12 @@ class EmailBody(Base):
     size: Mapped[datetime] = mapped_column(BigInteger)
     data: Mapped[datetime] = mapped_column(Text)
 
+    @classmethod
+    def getattr(cls, field):
+        if cls.__dict__.get(field) is not None:
+            return cls.__dict__.get(field)
+        raise Exception("field doesnt exist")
 
-Base.metadata.drop_all(postgresql_engine)
+
+# Base.metadata.drop_all(postgresql_engine)
 Base.metadata.create_all(postgresql_engine)
-

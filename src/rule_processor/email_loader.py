@@ -15,7 +15,7 @@ from lib.log import logger
 from src.rule_processor.email_db import EmailMetadata, EmailBody
 
 # If modifying these scopes, delete the file token.json.
-SCOPES = ["https://www.googleapis.com/auth/gmail.readonly"]
+SCOPES = ["https://www.googleapis.com/auth/gmail.modify"]
 
 
 def authenticate_gmail():
@@ -51,7 +51,6 @@ def get_messages():
         request = service.users().messages().list(userId="me")
         results = request.execute()
         messages = results.get("messages", [])
-        # messages = messages[:1]
         if not messages:
             print("No messages found.")
             return
@@ -63,8 +62,24 @@ def get_messages():
             transformer(sri)
 
     except HttpError as error:
-        # TODO(developer) - Handle errors from gmail API.
-        print(f"An error occurred: {error}")
+        logger.info(f"An error occurred: {error}")
+
+
+def do_actions(ids, action_payload):
+    try:
+        creds = authenticate_gmail()
+        # Call the Gmail API
+        service = build("gmail", "v1", credentials=creds)
+        for each_id in ids:
+            request = (
+                service.users()
+                .messages()
+                .modify(userId="me", id=each_id, body=action_payload)
+            )
+            results = request.execute()
+            print(results)
+    except Exception as ex:
+        logger.error("Error occurred - %s" % ex)
 
 
 def transformer(gmail_data):
@@ -91,7 +106,9 @@ def transformer(gmail_data):
         },
         "internalDate": {
             "col_name": "received_date",
-            "formatter": lambda x: datetime.datetime.utcfromtimestamp(int(x)/1000).strftime('%Y-%m-%d %H:%M:%S %z'),
+            "formatter": lambda x: datetime.datetime.utcfromtimestamp(
+                int(x) / 1000
+            ).strftime("%Y-%m-%d %H:%M:%S %z"),
         },
         "headers": {
             "From": {"col_name": "email_from", "formatter": lambda x: x},
@@ -103,11 +120,13 @@ def transformer(gmail_data):
     try:
         session = Session(postgresql_engine)
 
-        email_metadata = { }
+        email_metadata = {}
 
         for gmail_key, db_asso_dict in db_gmail_key_mapper.items():
             if gmail_data.get(gmail_key):
-                email_metadata[db_asso_dict["col_name"]] = db_asso_dict["formatter"](gmail_data[gmail_key])
+                email_metadata[db_asso_dict["col_name"]] = db_asso_dict["formatter"](
+                    gmail_data[gmail_key]
+                )
 
         email_metadata_headers = {}
 
@@ -137,11 +156,14 @@ def transformer(gmail_data):
                 email_bodies.append(email_body_object)
 
         email_metadata["email_body"] = email_bodies
+        # print(email_metadata)
         email_metadata_object = EmailMetadata(**email_metadata)
         session.add(email_metadata_object)
 
     except Exception as ex:
-        logger.exception(f"Exception occurred while loading the mail data to postgres - {ex}")
+        logger.exception(
+            f"Exception occurred while loading the mail data to postgres - {ex}"
+        )
         session.rollback()
         session.close()
         raise
@@ -151,5 +173,4 @@ def transformer(gmail_data):
         session.close()
 
 
-if __name__ == "__main__":
-    get_messages()
+# do_actions(['1881585f1953fd8a'])
