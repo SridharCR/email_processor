@@ -11,4 +11,5 @@ formatter = logging.Formatter(
 )
 
 consoleHandler.setFormatter(formatter)
+
 logger.addHandler(consoleHandler)

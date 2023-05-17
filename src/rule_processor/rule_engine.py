@@ -5,7 +5,7 @@ from lib.constants import FIELD_MAP, PREDICATE_MAP
 from lib.db import postgresql_engine
 from lib.log import logger
 from src.rule_processor.email_db import EmailMetadata, EmailBody
-from src.rule_processor.email_loader import do_actions
+from src.rule_processor.gmail_apis import GmailApi
 
 
 class Field:
@@ -14,7 +14,7 @@ class Field:
             logger.warning(
                 f"{field} is not configured yet, kindly try with different field"
             )
-            raise
+
         self.field = field
         self.datatype = FIELD_MAP.get(field)
 
@@ -94,7 +94,11 @@ class RuleActionGroup:
     def rule_cleanups(self):
         pass
 
-    def filter_data(self):
+    def process_emails(self):
+        self.__filter_data()
+        self.__apply_action()
+
+    def __filter_data(self):
         session = None
         try:
             session = Session(postgresql_engine)
@@ -111,8 +115,9 @@ class RuleActionGroup:
                         )
                 else:
                     cumulative_where_clause = each_rule.generate_where_clause()
-            statement = select(EmailMetadata).filter(cumulative_where_clause)
-            print(statement)
+            statement = (
+                select(EmailMetadata).join(EmailBody).filter(cumulative_where_clause)
+            )
             rows = session.execute(statement).all()
             for each in rows:
                 self.result.append(each[0].id)
@@ -123,19 +128,51 @@ class RuleActionGroup:
             logger.exception("Error occurred while preparing the filter query")
             raise
 
-    def apply_action(self):
-        for each_action in self.actions:
-            do_actions(self.result, each_action.payload)
+    def __apply_action(self):
+        if self.result:
+            logger.info(f"{len(self.result)} Matching emails found")
+            for each_action in self.actions:
+                payload = each_action.payload
+                payload["ids"] = self.result
+                gmail_obj = GmailApi()
+                gmail_obj.do_actions(each_action.payload)
+        else:
+            logger.info("No matching emails found, hence skipping")
 
 
-if __name__ == "__main__":
-    rule1 = Rule(Field("subject"), Predicate("equals"), "Fwd: HappyFox - Assignment")
-    rule2 = Rule(Field("subject"), Predicate("contains"), "Daily")
-    rule3 = Rule(Field("subject"), Predicate("contains"), "followed")
-    rule_groups = [rule1, rule2, rule3]
-    action1 = Action("unread")
-    action2 = Action("inbox")
-    action_groups = [action1, action2]
-    obj = RuleActionGroup(rule_groups, "any", action_groups)
-    obj.filter_data()
-    obj.apply_action()
+def option_builder():
+    print("Rule building: Enter your rules")
+    rule_list = []
+    action_list = []
+    new_rule_flag = True
+    new_action_flag = True
+    rule_predicate = input("If (any/all) of the conditions are met:")
+    while new_rule_flag:
+        field = Field(input("Select a field from the given list: "))
+        predicate = Predicate(input("Select a predicate from the given list: "))
+        value = input("Enter the value: ")
+        rule = Rule(field, predicate, value)
+        rule_list.append(rule)
+        new_rule_flag = input("Do you want to add another rule? (Yes/No):")
+        new_rule_flag = True if new_rule_flag == "Yes" else False
+
+    while new_action_flag:
+        action = Action(input("Select an action: "))
+        action_list.append(action)
+        new_action_flag = input("Do you want to add another action? (Yes/No)")
+        new_action_flag = True if new_action_flag == "Yes" else False
+
+    object = RuleActionGroup(rule_list, rule_predicate, action_list)
+    object.process_emails()
+
+
+# if __name__ == "__main__":
+#     rule1 = Rule(Field("subject"), Predicate("equals"), "Fwd: HappyFox - Assignment")
+#     rule2 = Rule(Field("subject"), Predicate("contains"), "Daily")
+#     rule3 = Rule(Field("subject"), Predicate("contains"), "followed")
+#     rule_groups = [rule1, rule2, rule3]
+#     action1 = Action("unread")
+#     action2 = Action("inbox")
+#     action_groups = [action1, action2]
+#     obj = RuleActionGroup(rule_groups, "any", action_groups)
+#     obj.process_emails()

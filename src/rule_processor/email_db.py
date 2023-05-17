@@ -8,6 +8,7 @@ from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import relationship
 
 from lib.db import postgresql_engine
+from lib.log import logger
 
 
 class Base(MappedAsDataclass, DeclarativeBase):
@@ -51,5 +52,13 @@ class EmailBody(Base):
         raise Exception("field doesnt exist")
 
 
-# Base.metadata.drop_all(postgresql_engine)
 Base.metadata.create_all(postgresql_engine)
+
+
+def email_db_cleanup():
+    logger.info("Email database cleanup initiated")
+    Base.metadata.drop_all(postgresql_engine)
+    logger.info("Email database cleanup completed")
+    logger.info("Email database setup initiated")
+    Base.metadata.create_all(postgresql_engine)
+    logger.info("Email database setup completed")
