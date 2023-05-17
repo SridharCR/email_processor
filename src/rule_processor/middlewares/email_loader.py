@@ -3,8 +3,8 @@ from sqlalchemy.orm import Session
 
 from lib.db import postgresql_engine
 from lib.log import logger
-from src.rule_processor.email_db import EmailMetadata, EmailBody
-from src.rule_processor.gmail_apis import GmailApi
+from src.rule_processor.dao.email_db import EmailMetadata, EmailBody
+from src.rule_processor.middlewares.gmail_apis import GmailApi
 import base64
 
 

@@ -1,9 +1,9 @@
 import argparse
 import logging
 
-from src.rule_processor.email_db import email_db_cleanup
-from src.rule_processor.email_loader import EmailLoader
-from src.rule_processor.rule_engine import option_builder
+from src.rule_processor.dao.email_db import email_db_cleanup
+from src.rule_processor.middlewares.email_loader import EmailLoader
+from src.rule_processor.middlewares.rule_engine import option_builder
 
 logging.getLogger("sqlalchemy.engine").setLevel(logging.ERROR)
 
