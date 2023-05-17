@@ -21,11 +21,12 @@ class EmailMetadata(Base):
     id: Mapped[int] = mapped_column(String(16), primary_key=True)
     thread_id: Mapped[str] = mapped_column(String(16))
     history_id: Mapped[str] = mapped_column(String(16))
-    email_from: Mapped[str] = mapped_column(String(100))
+    email_from: Mapped[str] = mapped_column(String(100), index=True)
     email_to: Mapped[str] = mapped_column(String(100))
-    received_date: Mapped[datetime] = mapped_column(DateTime)
-    subject: Mapped[str] = mapped_column(Text)
+    received_date: Mapped[datetime] = mapped_column(DateTime, index=True)
+    subject: Mapped[str] = mapped_column(Text, index=True)
     size_estimate: Mapped[int] = mapped_column(BigInteger)
+
     email_body: Mapped[List["EmailBody"]] = relationship()
 
     @classmethod
