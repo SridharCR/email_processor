@@ -32,7 +32,6 @@ class EmailMetadata(Base):
     def getattr(cls, field):
         if cls.__dict__.get(field) is not None:
             return cls.__dict__.get(field)
-        raise Exception("field doesnt exist")
 
 
 class EmailBody(Base):
@@ -49,7 +48,6 @@ class EmailBody(Base):
     def getattr(cls, field):
         if cls.__dict__.get(field) is not None:
             return cls.__dict__.get(field)
-        raise Exception("field doesnt exist")
 
 
 Base.metadata.create_all(postgresql_engine)

@@ -30,21 +30,18 @@ if __name__ == "__main__":
         nargs="?",
         help="Downloads the email data from gmail and loads it up in postgres database",
         type=bool,
-        # action=email_db_cleanup(),
     )
     parser.add_argument(
         "--import-email",
         nargs="?",
         help="Downloads the email data from gmail and loads it up in postgres database",
         type=bool,
-        # action=import_email(),
     )
     parser.add_argument(
         "--rule-engine",
         nargs="?",
-        help="Allows to configure rules and do operations",
+        help="Allows to configure conditions and do operations",
         type=bool,
-        # action=rule_engine(),
     )
     # Other contexts
     parser.add_argument("--verbose", nargs="?", help="Provides verbose logs", type=bool)
