@@ -25,6 +25,9 @@ The structure of the code is defined as follows,
 
 The code has been formatted with black and adheres to the pylint standards.
 
+- black: `All done! ✨ 🍰 ✨`
+- pylint: `Your code has been rated at 8.45/10`
+
 ## Setup
 
 1. Setup an venv/conda environment and install the requirements.txt
