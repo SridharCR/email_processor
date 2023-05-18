@@ -1,29 +1,48 @@
+"""
+This module takes care of loading the emails from gmail and transforms accordingly.
+"""
+
+import base64
 import datetime
+
 from sqlalchemy.orm import Session
 
 from lib.db import postgresql_engine
 from lib.log import logger
 from src.rule_processor.dao.email_db import EmailMetadata, EmailBody
 from src.rule_processor.middlewares.gmail_apis import GmailApi
-import base64
 
 
 class EmailLoader:
+    """
+    Class helps to pull the email data from gmail and applies transformation and loads them to
+    the database
+    """
+
     def __init__(self):
         pass
 
     def process(self):
+        """
+        Initiates the core process of pulling email data and loading them in database
+        :return:
+        """
         gmail_api_obj = GmailApi()
         gmail_data = gmail_api_obj.get_messages()
         logger.info("Email data transformation initiated")
         for each_gmail_data in gmail_data:
             logger.info(
-                f"Transforming and loading this email id {each_gmail_data['id']}"
+                "Transforming and loading this email id %s" % each_gmail_data["id"]
             )
             self.transformer(each_gmail_data)
         logger.info("Successfully loaded the mail data to postgres")
 
     def transformer(self, gmail_data):
+        """
+        Applies necessary transformation to the pulled gmail data and stores in the database
+        :param gmail_data: list
+        :return: None
+        """
         session = None
 
         db_gmail_key_mapper = {
@@ -54,9 +73,6 @@ class EmailLoader:
                 "To": {"col_name": "email_to", "formatter": lambda x: x},
                 "Subject": {"col_name": "subject", "formatter": lambda x: x},
             },
-            "body": {
-
-            }
         }
 
         try:
@@ -78,7 +94,6 @@ class EmailLoader:
                         each_header["name"]
                     ]
                     formatted_value = each_header["value"]
-                    # print(formatted_value)
                     if associated_dict.get("formatter", None):
                         formatted_value = associated_dict["formatter"](
                             each_header["value"]
@@ -89,7 +104,7 @@ class EmailLoader:
 
             email_metadata.update(email_metadata_headers)
 
-            email_bodies = []
+            email_metadata["email_body"] = []
             for each_part in gmail_data["payload"].get("parts", []):
                 if each_part["body"].get("data"):
                     email_body = {
@@ -99,9 +114,8 @@ class EmailLoader:
                         "data": base64.urlsafe_b64decode(each_part["body"]["data"]),
                     }
                     email_body_object = EmailBody(**email_body)
-                    email_bodies.append(email_body_object)
+                    email_metadata["email_body"].append(email_body_object)
 
-            email_metadata["email_body"] = email_bodies
             email_metadata_object = EmailMetadata(**email_metadata)
             session.add(email_metadata_object)
 
@@ -111,7 +125,6 @@ class EmailLoader:
             )
             session.rollback()
             session.close()
-            raise
         else:
             session.commit()
             session.close()

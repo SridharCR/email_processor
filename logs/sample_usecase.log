@@ -1,0 +1,132 @@
+(venv) sridhar@Jarvis:~/Documents/projects/email_processor$ python src/rule_processor/orchestrator.py --db-cleanup True --import-email True --rule-engine True
+18-05-2023 08:38:09 – email_processor – [INFO]: Email database cleanup initiated
+18-05-2023 08:38:09 – email_processor – [INFO]: Email database cleanup completed
+18-05-2023 08:38:09 – email_processor – [INFO]: Email database setup initiated
+18-05-2023 08:38:10 – email_processor – [INFO]: Email database setup completed
+18-05-2023 08:38:10 – email_processor – [INFO]: Starting to fetch the emails from Gmail
+18-05-2023 08:38:10 – email_processor – [INFO]: Fetched the emails from Gmail
+18-05-2023 08:38:10 – email_processor – [INFO]: Starting to fetch the email data and its metadata from Gmail
+18-05-2023 08:38:12 – email_processor – [INFO]: Fetched the email data and its metadata from Gmail
+18-05-2023 08:38:12 – email_processor – [INFO]: Email data transformation initiated
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 1882aa30e7f6c9c5
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 188257bdd7608df7
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 1882056f02015370
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 1881b354eb5bfcb4
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 1881609b9ee936f1
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 1881585f1953fd8a
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 18810df15f00a66a
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 1880bbabc02cffd3
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 1880b551e9e722eb
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 18806980ebf6b2e3
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 188016c53cf4c631
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 187fe903f66601f3
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 187fc481f5289303
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 187f71f9450b4bb6
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 187f1f8bb5e75b54
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 187ecd2bbbe85747
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 187e7aab63d6a5f6
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 187e74a655cb69b8
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 187e2854120e903d
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 187dd60f4b6bb97b
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 187d838cbf97b82f
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 187d311e21b315d9
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 187cdea4127558f4
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 187c8c6cbfb92f3e
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 187c39d411dc14f7
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 187c33da5feeb3cf
+18-05-2023 08:38:12 – email_processor – [INFO]: Transforming and loading this email id 187be78de3eb5ba6
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 187b9540197248e6
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 187b42bc45ebdad9
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 187af043ed851d7d
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 187a9dd9a96c8b13
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 187a4b97b51b2263
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1879f93a364fd989
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1879f2f12f1d3fc4
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1879a6b7aa95aa85
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1879547bafbd2d34
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 18793e98977cff7b
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1879028b43ddacb7
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1878ba9e3dc013c9
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 18786edf5b4312e2
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 18782dcb7e7c96df
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 18780a98f29ef1ee
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1877b87effc39aa5
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1877b635914338c0
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 18776626b842dd7f
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 187761ce2bbf01a3
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 187713d537be7302
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1876c18f17dbb064
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 18766eec71449886
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 18766a084c3c2397
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 187667db4e09c247
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 18765b62b1d2bef5
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 18765a86265aef84
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 18761cd09e818fad
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1875f4924c647693
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1875eb56a5af22dc
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1875ca230860483c
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1875ac8949f6d2d1
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1875959d52748c0e
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 187581f82beb29fa
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 18757822da6dc7d8
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1875718ff208f40b
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1875628fed4f7877
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 18752562dc461f4c
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1874f71b7a0a2f9d
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1874d318be333518
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1874a4ed5729bdec
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 187480b60bd5daa3
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 18744722e4ce9b45
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 18742e1df47fc642
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1873dbbbc0eea956
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 18738958ee81a8f5
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 187336fba3fcaf3a
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 187330d734178fbb
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1872e48956bc2d5c
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1872926460bb8a9a
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 187282b741f8adcb
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 187241a0a9d00ec9
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1871ed4edd14fb4f
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 18719ae22a0bcfd4
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 187149188ae50824
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1871262dad2c3448
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1870f6a984d8134e
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1870f4b4d051230e
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1870efd5b50a7b9a
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 1870a3e986ebf273
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 187051e5fb45c54e
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 187049804010ec81
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 18701eadeeffcb10
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 186fff0d01263585
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 186fac908e3a441f
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 186f6032bfb1a76f
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 186f5a0580b1f971
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 186f0812d6b0341c
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 186eb62a186ed38f
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 186eaf65a6997c08
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 186e63bce4be5425
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 186e109da9ba7b11
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 186d6cdbf3c06455
+18-05-2023 08:38:13 – email_processor – [INFO]: Transforming and loading this email id 186d1fca8787fd9c
+18-05-2023 08:38:13 – email_processor – [INFO]: Successfully loaded the mail data to postgres
+Condition building: Enter your conditions
+If (any/all) of the conditions are met:all
+Select a field from the given list (email_from,subject,received_date,data): email_from
+Select a predicate from the given list (contains,not_equals,equals,less_than,more_than): contains
+Enter the value: founders@dailycodingproblem.com
+Do you want to add another condition? (Yes/No):Yes
+Select a field from the given list (email_from,subject,received_date,data): subject
+Select a predicate from the given list (contains,not_equals,equals,less_than,more_than): contains
+Enter the value: coding
+Do you want to add another condition? (Yes/No):Yes
+Select a field from the given list (email_from,subject,received_date,data): received_date
+Select a predicate from the given list (contains,not_equals,equals,less_than,more_than): less_than
+Enter the value: 10 days
+Do you want to add another condition? (Yes/No):No
+Select an action(read/unread/inbox): read
+Do you want to add another action? (Yes/No):Yes
+Select an action(read/unread/inbox): inbox
+Do you want to add another action? (Yes/No):No
+18-05-2023 08:39:11 – email_processor – [INFO]: 10 Matching emails found
+18-05-2023 08:39:12 – email_processor – [INFO]: Email action - read applied successfully
+18-05-2023 08:39:13 – email_processor – [INFO]: Email action - inbox applied successfully

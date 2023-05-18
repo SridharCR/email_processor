@@ -1,3 +1,7 @@
+"""
+Custom logger module for email_processor module
+"""
+
 import logging
 
 logger = logging.getLogger("email_processor")

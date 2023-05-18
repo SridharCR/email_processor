@@ -1,3 +1,7 @@
+"""
+Helper module to talk with gmail apis.
+"""
+
 import json
 import os.path
 
@@ -5,7 +9,6 @@ from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
-from googleapiclient.http import BatchHttpRequest
 
 from lib.log import logger
 
@@ -13,6 +16,8 @@ SCOPES = ["https://www.googleapis.com/auth/gmail.modify"]
 
 
 class GmailApi:
+    """Gmail helper class"""
+
     def __init__(self):
         self.credentials = self.authenticate_gmail()
 
@@ -38,6 +43,10 @@ class GmailApi:
         return creds
 
     def get_messages(self):
+        """
+        Fetch the list of message ids and their email data and metadata
+        :return: list
+        """
         try:
             logger.info("Starting to fetch the emails from Gmail")
             service = build("gmail", "v1", credentials=self.credentials)
@@ -59,9 +68,15 @@ class GmailApi:
             return result
 
         except Exception as error:
-            logger.error(f"Error occurred while getting messages from gmail: {error}")
+            logger.error("Error occurred while getting messages from gmail: %s" % error)
 
-    def do_actions(self, action_payload):
+    def do_actions(self, action_payload, desc):
+        """
+        Modify the labels of the email
+        :param action_payload: dict
+        :param desc: str
+        :return: None
+        """
         try:
             logger.debug("Entering do_actions()")
             service = build("gmail", "v1", credentials=self.credentials)
@@ -70,7 +85,7 @@ class GmailApi:
             )
             results = request.execute()
             if results == "":
-                logger.info("Email actions applied successfully")
+                logger.info("Email action - %s applied successfully" % desc)
             logger.debug("Exiting do_actions()")
 
         except Exception as ex:

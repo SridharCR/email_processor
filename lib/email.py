@@ -1,2 +1,0 @@
-class EmailOperator:
-    pass

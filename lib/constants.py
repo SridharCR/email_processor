@@ -1,3 +1,7 @@
+"""
+Constants required for email_processor module
+"""
+
 from datetime import datetime
 
 FIELD_MAP = {

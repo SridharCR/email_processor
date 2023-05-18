@@ -1,5 +1,8 @@
-from datetime import datetime
+"""
+Database models for holding the email information
+"""
 
+from datetime import datetime
 from typing import List
 
 from sqlalchemy import ForeignKey, String, DateTime, BigInteger, Text, Integer
@@ -16,6 +19,10 @@ class Base(MappedAsDataclass, DeclarativeBase):
 
 
 class EmailMetadata(Base):
+    """
+    Model for storing the email metadata
+    """
+
     __tablename__ = "email_metadata"
 
     id: Mapped[int] = mapped_column(String(16), primary_key=True)
@@ -31,12 +38,22 @@ class EmailMetadata(Base):
 
     @classmethod
     def getattr(cls, field):
+        """
+        Gets the attribute of this model class
+        :param field: str
+        :return: attribute
+        """
         if cls.__dict__.get(field) is not None:
             return cls.__dict__.get(field)
 
+    def tablename(self):
+        return self.__tablename__
+
 
 class EmailBody(Base):
-    """User class will be converted to a dataclass"""
+    """
+    Model for storing the email body data
+    """
 
     __tablename__ = "email_body"
 
@@ -47,14 +64,26 @@ class EmailBody(Base):
 
     @classmethod
     def getattr(cls, field):
+        """
+        Gets the attribute of this model class
+        :param field: str
+        :return: attribute
+        """
         if cls.__dict__.get(field) is not None:
             return cls.__dict__.get(field)
+
+    def tablename(self):
+        return self.__tablename__
 
 
 Base.metadata.create_all(postgresql_engine)
 
 
 def email_db_cleanup():
+    """
+    Db cleanup method
+    :return: None
+    """
     logger.info("Email database cleanup initiated")
     Base.metadata.drop_all(postgresql_engine)
     logger.info("Email database cleanup completed")

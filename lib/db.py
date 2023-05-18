@@ -1,3 +1,7 @@
+"""
+Initiates the database engine.
+"""
+
 from sqlalchemy import create_engine
 
 PSQL_DB_URI = "postgresql+psycopg2://postgres:sridharpass@localhost:5433/postgres"

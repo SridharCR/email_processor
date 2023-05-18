@@ -1,3 +1,7 @@
+"""
+Orchestrates the entire email_processor functionality with different parameter combinations.
+"""
+
 import argparse
 import logging
 
@@ -9,18 +13,27 @@ logging.getLogger("sqlalchemy.engine").setLevel(logging.ERROR)
 
 
 def import_email():
+    """
+    Initiates the email import process
+    :return: None
+    """
     EmailLoader().process()
-    return "True"
 
 
 def rule_engine():
+    """
+    Provides the option builder and evaluates the rules
+    :return: None
+    """
     option_builder()
-    return "True"
 
 
 def db_cleanup():
+    """
+    Drops all tables and recreates the table
+    :return: None
+    """
     email_db_cleanup()
-    return "True"
 
 
 if __name__ == "__main__":
